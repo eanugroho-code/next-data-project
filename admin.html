@@ -395,25 +395,26 @@
       font-size: 14px;
     }
 
-    /* Template Styling - MODIFIKASI SESUAI PERMINTAAN */
+    /* Template Styling - REVISI SESUAI PERMINTAAN */
     .letter-container {
       width: 210mm; /* Lebar A4 */
       min-height: 297mm; /* Tinggi A4 */
       margin: 0 auto;
       background: white;
-      padding: 20mm 20mm 20mm 20mm; /* Margin seragam untuk A4 */
+      padding: 20mm; /* Margin seragam untuk A4 */
       box-sizing: border-box;
       position: relative;
       box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-      /* Background gambar - GANTI URL DENGAN GAMBAR ANDA */
+      /* Background gambar - disesuaikan agar lebih terang */
       background-image: url('./template/template-1.jpg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      background-attachment: scroll;
+      font-size: 11pt; /* Ukuran font standar untuk A4 */
+      line-height: 1.5; /* Line height yang sesuai */
     }
 
-    /* Overlay untuk membuat teks lebih terbaca */
+    /* Overlay untuk membuat teks lebih terbaca - DIKURANGI OPACITY */
     .letter-container::before {
       content: '';
       position: absolute;
@@ -421,7 +422,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.7); /* Diubah dari 0.85 menjadi 0.7 agar background lebih terlihat */
       z-index: 0;
     }
 
@@ -436,31 +437,40 @@
       display: none;
     }
 
+    /* REVISI: Title dirapatkan dan disesuaikan */
     .letter-title {
       text-align: center;
-      font-size: 16pt;
+      font-size: 14pt; /* Ukuran dikurangi sedikit */
       font-weight: bold;
-      margin: 0.5cm 0 0.5cm;
+      margin: 0 0 0.3cm 0; /* Margin bawah dikurangi */
       text-transform: uppercase;
       color: #1a237e;
+      line-height: 1.2; /* Line height diperkecil */
+    }
+
+    .letter-title:nth-of-type(2) {
+      font-size: 12pt;
+      margin-bottom: 0.5cm; /* Jarak ke nomor surat */
     }
 
     .letter-no {
       text-align: center;
-      font-size: 11pt;
-      margin-bottom: 1cm;
+      font-size: 10pt; /* Ukuran dikurangi */
+      margin-bottom: 0.8cm; /* Dikurangi dari 1cm */
       color: #333;
+      font-weight: bold;
     }
 
     /* Ganti tabel dengan div untuk data - lebih fleksibel */
     .letter-data-section {
-      margin-bottom: 0.6cm;
+      margin-bottom: 0.4cm; /* Dikurangi dari 0.6cm */
     }
 
     .data-row {
       display: flex;
-      margin-bottom: 5px;
+      margin-bottom: 3px; /* Dikurangi dari 5px */
       align-items: flex-start;
+      min-height: 22px; /* Tinggi minimum untuk konsistensi */
     }
 
     .data-label {
@@ -468,38 +478,44 @@
       font-weight: bold;
       padding-right: 10px;
       white-space: nowrap;
+      font-size: 11pt; /* Ukuran font diseragamkan */
     }
 
     .data-value {
       width: 65%;
-      padding-bottom: 3px;
+      padding-bottom: 2px; /* Dikurangi dari 3px */
       border-bottom: 1px dotted #777;
       min-height: 1.2em;
+      font-size: 11pt; /* Ukuran font diseragamkan */
     }
 
     .letter-statement {
       text-align: justify;
-      margin: 0.6cm 0;
+      margin: 0.4cm 0; /* Dikurangi dari 0.6cm */
       text-indent: 40px;
-      line-height: 1.6;
+      line-height: 1.5; /* Disesuaikan */
+      font-size: 11pt; /* Ukuran font diseragamkan */
     }
 
-    /* MODIFIKASI: Tanggal dan Hormat Kami lebih dekat */
+    /* REVISI: Tanggal dan Hormat Kami dirapatkan */
     .letter-date-place {
-      margin-top: 2cm; /* Dikurangi dari 2.5cm */
+      margin-top: 1.5cm; /* Dikurangi dari 2cm */
       text-align: right;
-      margin-bottom: 0.1cm; /* Sangat dekat dengan Hormat Kami */
+      margin-bottom: 0; /* Dihilangkan margin bawah */
+      font-size: 11pt;
     }
 
     .letter-signature {
       text-align: right;
+      margin-top: 0.2cm; /* Ditambahkan margin kecil di atas */
+      font-size: 11pt;
     }
 
     .letter-signature-name {
-      margin-top: 2cm; /* Dikurangi dari 3.5cm */
+      margin-top: 1.5cm; /* Dikurangi dari 2cm */
       text-decoration: underline;
       font-weight: bold;
-      font-size: 12pt;
+      font-size: 11pt; /* Dikurangi dari 12pt */
     }
 
     /* Footer dengan ikon media sosial */
@@ -713,6 +729,11 @@
         padding: 20mm;
         width: 210mm;
         min-height: 297mm;
+        background: white !important; /* Pastikan background putih saat print */
+      }
+      
+      .letter-container::before {
+        display: none; /* Hilangkan overlay saat print */
       }
       
       .btn {
@@ -1181,10 +1202,10 @@
             </div>
           </div>
           
-          <!-- Template Surat - MODIFIKASI SESUAI PERMINTAAN -->
+          <!-- Template Surat - REVISI SESUAI PERMINTAAN -->
           <div id="letterTemplate" class="letter-container">
             <div class="letter-title">SURAT KETERANGAN KERJA</div>
-            <div class="letter-title" style="font-size:11pt;">CERTIFICATE OF EMPLOYMENT</div>
+            <div class="letter-title">CERTIFICATE OF EMPLOYMENT</div>
             <div class="letter-no" id="letterNo">
               NO : 02/SK-HRD/NEXT/I/25
             </div>
@@ -1205,9 +1226,9 @@
               </div>
             </div>
 
-            <div class="letter-statement" style="margin-top:0.8cm;">
+            <div class="letter-statement" style="margin-top:0.6cm;">
               Dengan ini menerangkan bahwa:<br>
-          <em>Hereby certifies that:</em>
+              <em>Hereby certifies that:</em>
             </div>
 
             <div class="letter-data-section">
@@ -1251,13 +1272,13 @@
             </div>
 
             <div class="letter-statement">
-             Kami mengucapkan terimakasih atas kerjasama saudara selama bekerja dengan kami dan kami berharap saudara sukses dalam karir saudara di masa depan.
+              Kami mengucapkan terimakasih atas kerjasama saudara selama bekerja dengan kami dan kami berharap saudara sukses dalam karir saudara di masa depan.
             </div>
             <div class="letter-statement" style="font-style:italic;">
               We would like to say thank you for your cooperation during work with us and we wish you success in your career in the future.
             </div>
 
-            <!-- MODIFIKASI: Tanggal ditempel di atas Hormat Kami (jarak sangat dekat) -->
+            <!-- REVISI: Tanggal ditempel di atas Hormat Kami (jarak sangat dekat) -->
             <div class="letter-date-place" id="fieldTempatTanggal">
               Bekasi, 1 Desember 2025
             </div>
