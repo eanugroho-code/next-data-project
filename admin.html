@@ -406,7 +406,7 @@
       position: relative;
       box-shadow: 0 10px 40px rgba(0,0,0,0.1);
       /* Background gambar - GANTI URL DENGAN GAMBAR ANDA */
-      background-image: url('./template/template-1.jpg');
+      background-image: url('/template/template-1.jpg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -1165,8 +1165,8 @@
         <div class="preview-container" id="previewContainer">
           <div class="preview-header">
             <div class="preview-info">
-              <h3 id="previewTitle">Surat Paklaring</h3>
-              <p id="previewSubtitle">Detail surat paklaring karyawan</p>
+              <h3 id="previewTitle">Surat Packlaring</h3>
+              <p id="previewSubtitle">Detail surat packlaring karyawan</p>
             </div>
             <div class="data-actions">
               <button class="btn btn-primary" onclick="downloadPDF()">
@@ -1187,17 +1187,6 @@
             <div class="letter-title" style="font-size:11pt;">CERTIFICATE OF EMPLOYMENT</div>
             <div class="letter-no" id="letterNo">
               NO : 02/SK-HRD/NEXT/I/25
-            </div>
-
-            <div class="letter-data-section">
-              <div class="data-row">
-                <div class="data-label">Nama</div>
-                <div class="data-value">: <span id="fieldNama">..............................................................</span></div>
-              </div>
-              <div class="data-row">
-                <div class="data-label">Jabatan</div>
-                <div class="data-value">: <span id="fieldJabatan">..............................................................</span></div>
-              </div>
             </div>
 
             <div class="letter-statement">
@@ -1232,7 +1221,7 @@
               </div>
               <div class="data-row">
                 <div class="data-label">Jabatan Terakhir</div>
-                <div class="data-value">: <span id="fieldJabatanTerakhir">..............................................................</span></div>
+                <div class="data-value">: <span id="fieldJabatan">..............................................................</span></div>
               </div>
               <div class="data-row">
                 <div class="data-label">Nomor Identitas</div>
@@ -1280,16 +1269,6 @@
               <div class="letter-signature-name" id="fieldTandaTangan">M. Fajrian Noor</div>
               <span id="fieldJabatanTTD">Direktur</span>
             </div>
-
-            <!-- <div class="letter-footer">
-              <div>www.nextlogistik.com &nbsp; • &nbsp; @nextlogistik</div>
-              <div class="social-icons">
-                <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
-                <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="#" title="TikTok"><i class="fab fa-tiktok"></i></a>
-              </div>
-            </div> -->
           </div>
         </div>
       </div>
@@ -2043,7 +2022,7 @@
     }
   }
 
-  // Populate Letter Template
+  // Populate Letter Template - DIPERBAIKI
   function populateLetterTemplate(data) {
     // Format tanggal untuk Indonesia
     function formatLetterDate(dateString) {
@@ -2071,15 +2050,13 @@
                           { id: data.alasanBerhenti || 'Kontrak kerja berakhir', 
                             en: data.alasanBerhenti || 'End of contract' };
     
-    // Set values
+    // Set values - HANYA UNTUK ELEMEN YANG ADA DI TEMPLATE
     document.getElementById('letterNo').textContent = `NO : ${data.noSurat || '02/SK-HRD/NEXT/I/25'}`;
-    document.getElementById('fieldNama').textContent = data.namaLengkap || '.................................................';
-    document.getElementById('fieldJabatan').textContent = data.jabatan || '.................................................';
     document.getElementById('fieldPenandatangan').textContent = data.namaPenandatangan || settings.defaultPenandatangan;
     document.getElementById('fieldJabatanPenandatangan').textContent = data.jabatanPenandatangan || settings.defaultJabatan;
     document.getElementById('fieldNamaLengkap').textContent = data.namaLengkap || '.................................................';
     document.getElementById('fieldTTL').textContent = `${tempatLahir}, ${tglLahir}`;
-    document.getElementById('fieldJabatanTerakhir').textContent = data.jabatan || '.................................................';
+    document.getElementById('fieldJabatan').textContent = data.jabatan || '.................................................';
     document.getElementById('fieldNIP').textContent = data.nip || '.................................................';
     document.getElementById('fieldTanggalMasuk').textContent = data.tanggalMulai ? formatLetterDate(data.tanggalMulai) : '.................................................';
     document.getElementById('fieldTanggalKeluar').textContent = data.tanggalBerakhir ? formatLetterDate(data.tanggalBerakhir) : '.................................................';
