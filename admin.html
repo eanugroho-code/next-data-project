@@ -14,8 +14,6 @@
   <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
   <!-- Excel Export -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-  <!-- Font Awesome untuk ikon -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     * {
       margin: 0;
@@ -395,115 +393,90 @@
       font-size: 14px;
     }
 
-    /* Template Styling - REVISI A4 */
+    /* Template Styling */
     .letter-container {
-      width: 210mm; /* Lebar A4 */
-      min-height: 297mm; /* Tinggi A4 */
+      width: 210mm;
+      min-height: 297mm;
       margin: 0 auto;
       background: white;
-      padding: 25mm 20mm 20mm 25mm; /* Margin kiri atas kanan bawah */
+      padding: 2.5cm 2cm 2cm 2.5cm;
       box-sizing: border-box;
       position: relative;
       box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-      /* BACKGROUND GAMBAR - Ganti URL dengan gambar Anda */
-      background-image: url('https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2076&q=80');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: scroll;
     }
 
-    /* Overlay untuk membuat teks lebih terbaca di atas background */
-    .letter-container::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(255, 255, 255, 0.85);
-      z-index: 0;
+    .letter-header {
+      text-align: center;
+      margin-bottom: 1.5cm;
     }
 
-    /* Semua konten surat harus di atas overlay */
-    .letter-container > * {
-      position: relative;
-      z-index: 1;
+    .letter-logo {
+      font-size: 28pt;
+      font-weight: bold;
+      color: #e74c3c;
+      letter-spacing: 2px;
     }
 
-    /* Hapus letter-header dan letter-tabel */
-    .letter-header,
-    .letter-tabel {
-      display: none;
+    .letter-subtitle {
+      font-size: 11pt;
+      color: #555;
     }
 
     .letter-title {
       text-align: center;
-      font-size: 16pt;
+      font-size: 14pt;
       font-weight: bold;
       margin: 1.2cm 0 0.8cm;
       text-transform: uppercase;
-      color: #1a237e;
     }
 
     .letter-no {
       text-align: center;
       font-size: 11pt;
       margin-bottom: 1.5cm;
-      color: #333;
     }
 
-    /* Ganti tabel dengan div untuk data */
-    .letter-data-section {
+    .letter-table {
+      width: 100%;
+      border-collapse: collapse;
       margin-bottom: 0.8cm;
     }
 
-    .data-row {
-      display: flex;
-      margin-bottom: 6px;
-      align-items: flex-start;
+    .letter-table td.label {
+      width: 38%;
+      vertical-align: top;
+      padding: 4px 0;
     }
 
-    .data-label {
-      width: 35%;
-      font-weight: bold;
-      padding-right: 10px;
-      white-space: nowrap;
-    }
-
-    .data-value {
-      width: 65%;
-      padding-bottom: 4px;
+    .letter-table td.value {
+      width: 62%;
+      vertical-align: top;
+      padding: 4px 0;
       border-bottom: 1px dotted #777;
-      min-height: 1.2em;
     }
 
     .letter-statement {
       text-align: justify;
-      margin: 0.8cm 0;
+      margin: 1cm 0;
       text-indent: 40px;
-      line-height: 1.6;
     }
 
-    /* REVISI: Tanggal dan Hormat Kami lebih dekat */
     .letter-date-place {
       margin-top: 2.5cm;
       text-align: right;
-      margin-bottom: 0.3cm; /* Kurangi jarak dengan hormat kami */
     }
 
     .letter-signature {
+      margin-top: 1.8cm;
       text-align: right;
     }
 
     .letter-signature-name {
-      margin-top: 2.5cm; /* Kurangi jarak untuk lebih dekat */
+      margin-top: 3.5cm;
       text-decoration: underline;
       font-weight: bold;
-      font-size: 12pt;
     }
 
-    /* Footer dengan ikon media sosial */
     .letter-footer {
       position: absolute;
       bottom: 1.2cm;
@@ -512,26 +485,6 @@
       font-size: 9pt;
       color: #555;
       text-align: center;
-      border-top: 1px solid #aaa;
-      padding-top: 0.4cm;
-    }
-
-    .social-icons {
-      margin-top: 8px;
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-    }
-
-    .social-icons a {
-      color: #555;
-      font-size: 12pt;
-      transition: color 0.3s;
-      text-decoration: none;
-    }
-
-    .social-icons a:hover {
-      color: #e74c3c;
     }
 
     /* Modal */
@@ -665,59 +618,6 @@
       
       .letter-container {
         padding: 1.5cm;
-        background-size: cover;
-      }
-      
-      .data-row {
-        flex-direction: column;
-        margin-bottom: 10px;
-      }
-      
-      .data-label, .data-value {
-        width: 100%;
-      }
-      
-      .data-label {
-        padding-right: 0;
-        margin-bottom: 2px;
-      }
-    }
-
-    /* Printing Styles */
-    @media print {
-      body * {
-        visibility: hidden;
-      }
-      
-      .preview-container, .preview-container * {
-        visibility: visible;
-      }
-      
-      .preview-container {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        background: white;
-        padding: 0;
-        margin: 0;
-        box-shadow: none;
-      }
-      
-      .preview-header {
-        display: none;
-      }
-      
-      .letter-container {
-        box-shadow: none;
-        margin: 0;
-        padding: 25mm 20mm 20mm 25mm;
-        width: 210mm;
-        min-height: 297mm;
-      }
-      
-      .btn {
-        display: none;
       }
     }
 
@@ -1182,81 +1082,86 @@
             </div>
           </div>
           
-          <!-- Template Surat - REVISI -->
+          <!-- Template Surat -->
           <div id="letterTemplate" class="letter-container">
+            <div class="letter-header">
+              <div class="letter-logo">N C X T</div>
+              <div class="letter-subtitle">CARGO - LOGISTICS</div>
+            </div>
+
             <div class="letter-title">SURAT KETERANGAN KERJA</div>
-            <div class="letter-title" style="font-size:11pt; margin-top:0; margin-bottom: 1cm;">CERTIFICATE OF EMPLOYMENT</div>
+            <div class="letter-title" style="font-size:11pt; margin-top:0;">CERTIFICATE OF EMPLOYMENT</div>
 
             <div class="letter-no" id="letterNo">
               NO : 02/SK-HRD/NEXT/I/25
             </div>
 
-            <div class="letter-data-section">
-              <div class="data-row">
-                <div class="data-label">Nama</div>
-                <div class="data-value">: <span id="fieldNama">..............................................................</span></div>
-              </div>
-              <div class="data-row">
-                <div class="data-label">Jabatan</div>
-                <div class="data-value">: <span id="fieldJabatan">..............................................................</span></div>
-              </div>
-            </div>
+            <table class="letter-table">
+              <tr>
+                <td class="label">Nama</td>
+                <td class="value">: <span id="fieldNama">..............................................................</span></td>
+              </tr>
+              <tr>
+                <td class="label">Jabatan</td>
+                <td class="value">: <span id="fieldJabatan">..............................................................</span></td>
+              </tr>
+            </table>
 
             <div class="letter-statement">
               Yang bertanda tangan di bawah ini:<br>
               <em>The undersigned below:</em>
             </div>
 
-            <div class="letter-data-section">
-              <div class="data-row">
-                <div class="data-label">Nama</div>
-                <div class="data-value">: <span id="fieldPenandatangan">..............................................................</span></div>
-              </div>
-              <div class="data-row">
-                <div class="data-label">Jabatan</div>
-                <div class="data-value">: <span id="fieldJabatanPenandatangan">..............................................................</span></div>
-              </div>
-            </div>
+            <table class="letter-table">
+              <tr>
+                <td class="label">Nama</td>
+                <td class="value">: <span id="fieldPenandatangan">..............................................................</span></td>
+              </tr>
+              <tr>
+                <td class="label">Jabatan</td>
+                <td class="value">: <span id="fieldJabatanPenandatangan">..............................................................</span></td>
+              </tr>
+            </table>
 
             <div class="letter-statement" style="margin-top:1.2cm;">
               Dengan ini menerangkan bahwa:<br>
               <em>Hereby certifies that:</em>
             </div>
 
-            <div class="letter-data-section">
-              <div class="data-row">
-                <div class="data-label">Nama Lengkap</div>
-                <div class="data-value">: <span id="fieldNamaLengkap">..............................................................</span></div>
-              </div>
-              <div class="data-row">
-                <div class="data-label">Tempat/Tgl Lahir</div>
-                <div class="data-value">: <span id="fieldTTL">..............................................................</span></div>
-              </div>
-              <div class="data-row">
-                <div class="data-label">Jabatan Terakhir</div>
-                <div class="data-value">: <span id="fieldJabatanTerakhir">..............................................................</span></div>
-              </div>
-              <div class="data-row">
-                <div class="data-label">Nomor Identitas</div>
-                <div class="data-value">: <span id="fieldNIP">..............................................................</span></div>
-              </div>
-            </div>
+            <table class="letter-table">
+              <tr>
+                <td class="label">Nama Lengkap</td>
+                <td class="value">: <span id="fieldNamaLengkap">..............................................................</span></td>
+              </tr>
+              <tr>
+                <td class="label">Tempat/Tgl Lahir</td>
+                <td class="value">: <span id="fieldTTL">..............................................................</span></td>
+              </tr>
+              <tr>
+                <td class="label">Jabatan Terakhir</td>
+                <td class="value">: <span id="fieldJabatanTerakhir">..............................................................</span></td>
+              </tr>
+              <tr>
+                <td class="label">Nomor Identitas</td>
+                <td class="value">: <span id="fieldNIP">..............................................................</span></td>
+              </tr>
+            </table>
 
             <div class="letter-statement">
               Adalah benar pernah bekerja di perusahaan kami sejak:<br>
               <em>Was employed at our company starting from:</em>
             </div>
 
-            <div class="letter-data-section">
-              <div class="data-row">
-                <div class="data-label">Tanggal Masuk</div>
-                <div class="data-value">: <span id="fieldTanggalMasuk">..............................................................</span></div>
-              </div>
-              <div class="data-row">
-                <div class="data-label">Tanggal Keluar</div>
-                <div class="data-value">: <span id="fieldTanggalKeluar">..............................................................</span></div>
-              </div>
-            </div>
+            <table class="letter-table">
+              <tr>
+                <td class="label">Tanggal Masuk</td>
+                <td class="value">: <span id="fieldTanggalMasuk">..............................................................</span></td>
+              </tr>
+              <tr>
+                <td class="label">Tanggal Keluar</td>
+                <td class="value">: <span id="fieldTanggalKeluar">..............................................................</span></td>
+              </tr>
+            </table>
 
             <div class="letter-statement">
               Alasan berhenti kerja : <span id="fieldAlasanBerhenti">Mengundurkan diri secara baik-baik / kontrak kerja berakhir</span><br>
@@ -1272,27 +1177,21 @@
               This certificate is issued for any lawful purpose.
             </div>
 
-            <!-- REVISI: Tanggal ditempel di atas Hormat Kami -->
             <div class="letter-date-place" id="fieldTempatTanggal">
               Bekasi, 1 Desember 2025
             </div>
 
             <div class="letter-signature">
               Hormat kami,<br>
-              <em>Sincerely,</em><br><br><br>
+              <em>Sincerely,</em><br><br><br><br>
 
               <div class="letter-signature-name" id="fieldTandaTangan">M. Fajrian Noor</div>
               <span id="fieldJabatanTTD">Direktur</span>
             </div>
 
             <div class="letter-footer">
-              <div>www.nextlogistik.com &nbsp; • &nbsp; @nextlogistik</div>
-              <div class="social-icons">
-                <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
-                <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="#" title="TikTok"><i class="fab fa-tiktok"></i></a>
-              </div>
+              <hr style="border:none; border-top:1px solid #aaa; margin:0.4cm 0;">
+              www.nextlogistik.com &nbsp; • &nbsp; @nextlogistik
             </div>
           </div>
         </div>
@@ -1456,9 +1355,7 @@
     defaultJabatan: "Direktur",
     maxData: 25,
     showOldData: 90,
-    autoBackup: "weekly",
-    // Tambahan untuk background gambar
-    backgroundImage: "https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2076&q=80"
+    autoBackup: "weekly"
   };
 
   // Format tanggal Indonesia
@@ -2094,12 +1991,6 @@
     document.getElementById('fieldTempatTanggal').textContent = `${settings.kotaTandaTangan}, ${formatLetterDate(data.tanggalSurat || new Date())}`;
     document.getElementById('fieldTandaTangan').textContent = data.namaPenandatangan || settings.defaultPenandatangan;
     document.getElementById('fieldJabatanTTD').textContent = data.jabatanPenandatangan || settings.defaultJabatan;
-    
-    // Set background image jika ada
-    const letterContainer = document.getElementById('letterTemplate');
-    if (settings.backgroundImage && settings.backgroundImage !== '') {
-      letterContainer.style.backgroundImage = `url('${settings.backgroundImage}')`;
-    }
   }
 
   // Close Preview
@@ -2169,46 +2060,16 @@
 
   // Print Letter
   function printLetter() {
-    const printWindow = window.open('', '_blank');
-    const printContent = document.getElementById('letterTemplate').outerHTML;
+    const printContent = document.getElementById('letterTemplate').innerHTML;
+    const originalContent = document.body.innerHTML;
     
-    printWindow.document.write(`
-      <!DOCTYPE html>
-      <html>
-      <head>
-        <title>Cetak Surat Packlaring</title>
-        <style>
-          body { 
-            margin: 0; 
-            padding: 0; 
-            font-family: 'Times New Roman', serif; 
-          }
-          @page { 
-            size: A4; 
-            margin: 0; 
-          }
-          @media print {
-            body { 
-              width: 210mm; 
-              height: 297mm; 
-            }
-          }
-        </style>
-      </head>
-      <body>
-        ${printContent}
-        <script>
-          window.onload = function() {
-            window.print();
-            setTimeout(function() {
-              window.close();
-            }, 500);
-          }
-        </script>
-      </body>
-      </html>
-    `);
-    printWindow.document.close();
+    document.body.innerHTML = printContent;
+    window.print();
+    document.body.innerHTML = originalContent;
+    
+    // Restore preview
+    document.getElementById('previewContainer').classList.add('active');
+    document.getElementById('dataListContainer').classList.remove('active');
   }
 
   // Edit Status Modal
@@ -2379,12 +2240,6 @@
     
     // Setup auto refresh
     setupAutoRefresh();
-    
-    // Update background image preview
-    if (settings.backgroundImage) {
-      const letterContainer = document.getElementById('letterTemplate');
-      letterContainer.style.backgroundImage = `url('${settings.backgroundImage}')`;
-    }
   }
 
   // Save Settings
@@ -2400,7 +2255,6 @@
     settings.showOldData = document.getElementById('showOldData').value;
     settings.autoBackup = document.getElementById('autoBackup').value;
     
-    // Simpan ke localStorage
     localStorage.setItem('packlaringAdminSettings', JSON.stringify(settings));
     
     setupAutoRefresh();
@@ -2421,8 +2275,7 @@
         defaultJabatan: "Direktur",
         maxData: 25,
         showOldData: 90,
-        autoBackup: "weekly",
-        backgroundImage: "https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2076&q=80"
+        autoBackup: "weekly"
       };
       
       localStorage.setItem('packlaringAdminSettings', JSON.stringify(settings));
@@ -2487,17 +2340,6 @@
         closePreview();
       }
     });
-    
-    // Load background image from settings
-    const savedSettings = localStorage.getItem('packlaringAdminSettings');
-    if (savedSettings) {
-      const loadedSettings = JSON.parse(savedSettings);
-      if (loadedSettings.backgroundImage) {
-        settings.backgroundImage = loadedSettings.backgroundImage;
-        const letterContainer = document.getElementById('letterTemplate');
-        letterContainer.style.backgroundImage = `url('${settings.backgroundImage}')`;
-      }
-    }
   });
 </script>
 </body>
