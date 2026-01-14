@@ -397,40 +397,51 @@
 
     /* Template Styling - REVISI SESUAI PERMINTAAN */
     .letter-container {
-      width: 210mm; /* Lebar A4 */
-      min-height: 297mm; /* Tinggi A4 */
-      margin: 0 auto;
-      background: white;
-      padding: 20mm; /* Margin seragam untuk A4 */
-      box-sizing: border-box;
-      position: relative;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-      /* Background gambar - disesuaikan agar lebih terang */
-      background-image: url('./template/template-1.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      font-size: 11pt; /* Ukuran font standar untuk A4 */
-      line-height: 1.5; /* Line height yang sesuai */
-    }
+  width: 210mm; /* Lebar A4 */
+  min-height: 297mm; /* Tinggi A4 */
+  margin: 0 auto;
+  padding: 20mm; /* Margin seragam untuk A4 */
+  box-sizing: border-box;
+  position: relative;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+  
+  /* Background yang optimal untuk keterbacaan */
+  background: 
+    /* Overlay putih dengan opacity 85% */
+    linear-gradient(
+      rgba(255, 255, 255, 0.85), 
+      rgba(255, 255, 255, 0.85)
+    ),
+    /* Background image */
+    url('./template/template-1.jpg');
+  
+  /* Mengatur background image */
+  background-size: 100% 100% ; /* atau  cover jika ingin memaksa penuh */
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  
+  /* Memastikan background memenuhi area konten */
+  background-origin: padding-box;
+  background-clip: padding-box;
+  
+  /* Font dan typography */
+  font-size: 11pt;
+  line-height: 1.5;
+  color: #333; /* Warna teks yang kontras */
+}
 
-    /* Overlay untuk membuat teks lebih terbaca - DIKURANGI OPACITY */
-    .letter-container::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(255, 255, 255, 0.7); /* Diubah dari 0.85 menjadi 0.7 agar background lebih terlihat */
-      z-index: 0;
-    }
+/* Hapus pseudo-element ::before karena sudah menggunakan gradient overlay */
+.letter-container::before {
+  display: none;
+}
 
-    /* Semua konten surat harus di atas overlay */
-    .letter-container > * {
-      position: relative;
-      z-index: 1;
-    }
+/* Semua konten surat */
+.letter-container > * {
+  position: relative;
+  z-index: 1;
+}
+
 
     /* Hapus letter-header (logo) */
     .letter-header {
